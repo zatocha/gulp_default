@@ -32,7 +32,7 @@ gulp.task('build', function(){
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', csso()))
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./build'))
 })
 
 
