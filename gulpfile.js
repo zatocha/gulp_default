@@ -33,7 +33,9 @@ gulp.task('build', function(){
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', csso()))
-    .pipe(gulp.dest('./build'))
+  var buildFonts = gulp.src('./app/fonts/**/*')
+    .pipe(gulp.dest('./build/fonts'))
+    
 })
 
 
