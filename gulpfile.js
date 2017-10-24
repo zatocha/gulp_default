@@ -8,17 +8,17 @@ var gulp = require('gulp'),
     csso = require('gulp-csso'),
     prefix = require('gulp-autoprefixer');
 
-gulp.task('server', function() {
+gulp.task('server', function() { // создаем task browser-sync
     browserSync.init({
       server: {
         port: 3000,
         baseDir: "./app"
       },
-      notify: false
+      notify: false // отключаем уведомления
     });
 });
 
-gulp.task('styles', function(){
+gulp.task('styles', function(){ // создаем task
   gulp.src('./app/sass/**/*.sass')
     .pipe(sass().on('error', sass.logError))
     .pipe(prefix({
@@ -28,19 +28,20 @@ gulp.task('styles', function(){
     .pipe(browserSync.stream());
 });
 
-gulp.task('build', function(){
+gulp.task('build', function(){ // создаем task для сборки проекта
   gulp.src('./app/*.html')
-    .pipe(useref())
-    .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulpIf('*.css', csso()))
-  var buildFonts = gulp.src('./app/fonts/**/*')
-    .pipe(gulp.dest('./build/fonts'))
-  var buildImages = gulp.src('./app/img/**/*')
-    .pipe(gulp.dest('./build/img'))
+    .pipe(useref()) // конкатенируем скрипты и стили
+    .pipe(gulpIf('*.js', uglify())) // сжимаем js
+    .pipe(gulpIf('*.css', csso())) // минифицируем стили
+    .pipe(gulp.dest('./build')) // выгружаем скрипты и js в папку build
+  var buildFonts = gulp.src('./app/fonts/**/*') // берем источник
+    .pipe(gulp.dest('./build/fonts')) // выгружаем шрифты в папку build
+  var buildImages = gulp.src('./app/img/**/*') // берем источник
+    .pipe(gulp.dest('./build/img')) // выгружаем картинки в папку build
 })
 
 
-gulp.task('watch', function(){
+gulp.task('watch', function(){ // создаем task для отслеживания изменений в sass
   gulp.watch('./app/sass/**/*.sass', ['styles']);
 });
 
