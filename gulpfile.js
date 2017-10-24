@@ -13,7 +13,8 @@ gulp.task('server', function() {
       server: {
         port: 3000,
         baseDir: "./app"
-      }
+      },
+      notify: false
     });
 });
 
