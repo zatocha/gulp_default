@@ -35,7 +35,8 @@ gulp.task('build', function(){
     .pipe(gulpIf('*.css', csso()))
   var buildFonts = gulp.src('./app/fonts/**/*')
     .pipe(gulp.dest('./build/fonts'))
-    
+  var buildImages = gulp.src('./app/img/**/*')
+    .pipe(gulp.dest('./build/img'))
 })
 
 
