@@ -7,7 +7,8 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	csso = require('gulp-csso'),
 	prefix = require('gulp-autoprefixer'),
-	includer = require("gulp-x-includer");
+	includer = require("gulp-x-includer"),
+	del = require('del');
 
 gulp.task('server', function () { // создаем task browser-sync
 	browserSync.init({
@@ -29,7 +30,11 @@ gulp.task('styles', function () { // создаем task
 		.pipe(browserSync.stream());
 });
 
-gulp.task('build', function () { // создаем task для сборки проекта
+gulp.task('clean', function() {
+	return del.sync('./build'); // Удаляем папку dist перед сборкой
+});
+
+gulp.task('build', ['clean'], function () { // создаем task для сборки проекта
 	gulp.src('./app/*.html')
 		.pipe(includer()) // выполняем include html файлов
 		.pipe(useref()) // конкатенируем скрипты и стили
