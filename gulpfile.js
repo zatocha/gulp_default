@@ -1,14 +1,14 @@
 "use strict";
 var gulp = require('gulp'),
-	browserSync = require('browser-sync').create(),
-	sass = require('gulp-sass'),
-	useref = require('gulp-useref'),
-	gulpIf = require('gulp-if'),
-	uglify = require('gulp-uglify'),
-	csso = require('gulp-csso'),
-	prefix = require('gulp-autoprefixer'),
-	includer = require("gulp-x-includer"),
-	del = require('del');
+	browserSync = require('browser-sync').create(), // подключаем Browser Sync
+	sass = require('gulp-sass'), // подключаем sass пакет
+	useref = require('gulp-useref'), // подключаем библиотеку для конкатенации стилей и скрипто
+	gulpIf = require('gulp-if'), //
+	uglify = require('gulp-uglify'), // подключаем библиотеку для сжатия JS
+	csso = require('gulp-csso'), // подключаем библиотеку для минимизации стилей
+	prefix = require('gulp-autoprefixer'), // подключаем библиотеку для автоматического добавления префиксов
+	includer = require("gulp-x-includer"), // подключаем библиотеку для вставки html шаблонов
+	del = require('del'); // подключаем библиотеку для удаления файлов и папок
 
 gulp.task('server', function () { // создаем task browser-sync
 	browserSync.init({
@@ -30,7 +30,7 @@ gulp.task('styles', function () { // создаем task
 		.pipe(browserSync.stream());
 });
 
-gulp.task('clean', function() {
+gulp.task('clean', function () {
 	return del.sync('./build'); // Удаляем папку dist перед сборкой
 });
 
