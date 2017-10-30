@@ -1,6 +1,6 @@
 {
   "name": "gulp_default",
-  "description": "",
+  "description": "first gulp build",
   "main": "index.js",
   "license": "ISC",
   "homepage": "",
