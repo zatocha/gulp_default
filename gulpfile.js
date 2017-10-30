@@ -34,7 +34,7 @@ gulp.task('clean', function () {
 	return del.sync('./build'); // Удаляем папку dist перед сборкой
 });
 
-gulp.task('build', ['clean'], function () { // создаем task для сборки проекта
+gulp.task('build', ['clean', 'styles'], function () { // создаем task для сборки проекта
 	gulp.src('./app/*.html')
 		.pipe(includer()) // выполняем include html файлов
 		.pipe(useref()) // конкатенируем скрипты и стили
