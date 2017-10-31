@@ -7,6 +7,7 @@ var gulp = require('gulp'), // Подключаем Gulp
 	uglify = require('gulp-uglify'), // Для сжатия JS
 	csso = require('gulp-csso'), // Для минимизации CSS
 	prefix = require('gulp-autoprefixer'), // Для автоматического проставления префиксов
+	spritesmith = require('gulp.spritesmith'), // Для создания CSS спрайтов
 	imagemin = require('gulp-imagemin'), // Подключаем библиотеку для работы с изображениями
 	pngquant = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
 	cache = require('gulp-cache'), // Подключаем библиотеку кеширования
@@ -31,6 +32,15 @@ gulp.task('sass', function () {
 		}))
 		.pipe(gulp.dest('./app/css')) // Выгружаем результат в папку app/css
 		.pipe(browserSync.stream()) // Обновляем CSS на странице при изменении
+});
+
+gulp.task('sprite', function () {
+	var spriteData = gulp.src('./app/img/sprite/*.png').pipe(spritesmith({
+		imgName: 'sprite.png',
+		cssName: 'sprite.css'
+	}));
+	spriteData.img.pipe(gulp.dest('./app/img')); // путь, куда сохраняем картинку
+	spriteData.css.pipe(gulp.dest('./app/css')); // путь, куда сохраняем стили
 });
 
 gulp.task('img', function () {
