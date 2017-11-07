@@ -25,7 +25,7 @@ gulp.task('server', function () { // Создаем task browser-sync
 });
 
 gulp.task('sass', function () {
-	return gulp.src('./app/sass/**/*.sass') // Берем источник
+	return gulp.src(['./app/sass/**/*.sass', './app/sass/**/*.scss']) // Берем источник
 		.pipe(sass().on('error', sass.logError)) // Преобразуем Sass в CSS
 		.pipe(prefix({  // Создаем префиксы
 			browsers: ['last 15 versions']
@@ -72,6 +72,7 @@ gulp.task('build', ['clean', 'sass', 'img'], function () { // создаем tas
 
 gulp.task('watch', function () { // создаем task для отслеживания изменений в sass
 	gulp.watch('./app/sass/**/*.sass', ['sass']); // Наблюдение за SASS файлами в папке sass
+	gulp.watch('./app/sass/**/*.scss', ['sass']); // Наблюдение за SCSS файлами в папке sass
 	gulp.watch('./app/*.html', browserSync.reload); // Наблюдение за HTML файлами в корне проекта
 	gulp.watch('./app/js/**/*.js', browserSync.reload);   // Наблюдение за JS файлами в папке js
 });
